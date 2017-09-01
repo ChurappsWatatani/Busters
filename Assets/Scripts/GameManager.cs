@@ -1,28 +1,68 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class GameManager {
-	public int point = 0;
-	public Dictionary<GameObject, int> busterGarbages = new Dictionary<GameObject, int>();
+public class GameManager : CASingletonMonoBehaviour<GameManager> {
+	const int MAX_PLAY_COUNT = 5;
 
-	private static GameManager instance_;
-
-	public static GameManager Instance()
+	public enum State
 	{
-		if (instance_ == null) {
-			instance_ = new GameManager();
-		}
-		return instance_;
+		Start,
+		Playing,
+		GameEnd,
+		EndAnimation,
+		Result
+	}
+	
+	public int point = 0;
+	public int playCount = 0;
+	public List<GameObject> garbages = new List<GameObject>();
+	public Dictionary<string, int> busterGarbages = new Dictionary<string, int>();
+	public State gameState = State.Start;
+
+	public void Start()
+	{
+		Debug.Log("Start");
+		Initialize();
 	}
 
-	public void AddGarbages(GameObject obj)
+	public void Update()
 	{
-		if (busterGarbages.ContainsKey(obj)) {
-			busterGarbages[obj]++;
+		if (gameState == State.GameEnd) {
+			gameState = State.EndAnimation;
+			Debug.Log("Game EndAnimation");
+		}
+	}
+
+	public void Initialize()
+	{
+		point = 0;
+		playCount = 0;
+		gameState = State.Start;
+
+		garbages = GameObject.FindGameObjectsWithTag("Garbage").ToList();
+	}
+
+	public void AddBusgerGarbages(GameObject obj)
+	{
+		if (busterGarbages.ContainsKey(obj.name)) {
+			busterGarbages[obj.name]++;
 		}
 		else {
-			busterGarbages.Add(obj, 1);
+			busterGarbages.Add(obj.name, 1);
 		}
+		garbages.Remove(obj);
+		if (garbages.Count <= 0) {
+			gameState = State.GameEnd;
+		}
+	}
+
+	public bool CheckEndPlayCount()
+	{
+		if (MAX_PLAY_COUNT <= playCount) {
+			gameState = State.GameEnd;
+		}
+		return (MAX_PLAY_COUNT <= playCount);
 	}
 }
