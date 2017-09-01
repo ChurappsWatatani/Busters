@@ -7,7 +7,7 @@ public class TitleSceneManager : MonoBehaviour {
 
 	public void OnPushStartButton()
 	{
-		SceneManager.LoadScene("Game");
+		SceneManager.LoadScene("04_Game");
 	}
 
 	public void OnPushCreditButton()
