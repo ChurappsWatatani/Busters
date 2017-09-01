@@ -12,10 +12,10 @@ public class TitleSceneManager : MonoBehaviour {
 
 	public void OnPushCreditButton()
 	{
-		SceneManager.LoadScene("Credit");
+		SceneManager.LoadScene("03_Credit");
 	}
 	public void OnPushSecretButton()
 	{
-		SceneManager.LoadScene("Secret");
+		SceneManager.LoadScene("02_Secret");
 	}
 }

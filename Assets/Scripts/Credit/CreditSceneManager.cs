@@ -7,6 +7,6 @@ public class CreditSceneManager : MonoBehaviour {
 
 	public void OnTouchTitleButton()
 	{
-		SceneManager.LoadScene("Title");
+		SceneManager.LoadScene("01_Title");
 	}
 }
