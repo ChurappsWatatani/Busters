@@ -15,8 +15,8 @@ public class PointTextController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (point != GameManager.Instance().point){
-			point = GameManager.Instance().point;
+		if (point != GameManager.instance.point){
+			point = GameManager.instance.point;
 			pointText.text = point.ToString();
 		}
 	}

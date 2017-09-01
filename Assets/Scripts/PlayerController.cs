@@ -38,11 +38,18 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (isSnap) {
-			Debug.Log("Distance : " + Mathf.Abs(Vector2.Distance(rigid.velocity, Vector2.zero)));
 			if (Mathf.Abs(Vector2.Distance(rigid.velocity, Vector2.zero)) < 50) {
 				rigid.velocity = Vector2.zero;
-				Debug.Log("EndPlay");
-				isSnap = false;
+				GameManager.instance.playCount++;
+				if (GameManager.instance.CheckEndPlayCount()) {
+					//ゲームエンド
+
+					Debug.Log("EndPlay");
+				}
+				else {
+					isSnap = false;
+					Debug.Log("NextPlay");
+				}
 			}
 		}
 	}
@@ -54,7 +61,8 @@ public class PlayerController : MonoBehaviour {
 			g.hp--;
 			if (g.hp <= 0) {
 				//ポイント追加して削除
-				GameManager.Instance().point += g.point;
+				GameManager.instance.point += g.point;
+				GameManager.instance.AddBusgerGarbages(g.gameObject);
 				Destroy(g.gameObject);
 			}
 		}
