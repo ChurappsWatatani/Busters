@@ -9,11 +9,13 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 	public enum State
 	{
 		Start,
+		StartAnimation,
 		Playing,
 		GameEnd,
 		EndAnimation,
 		Result
 	}
+	public int stageCount = 1;
 	
 	public int point = 0;
 	public int playCount = 0;
@@ -26,14 +28,6 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 	{
 		Debug.Log("Start");
 		Initialize();
-	}
-
-	public void Update()
-	{
-		if (gameState == State.GameEnd) {
-			gameState = State.EndAnimation;
-			Debug.Log("Game EndAnimation");
-		}
 	}
 
 	public void Initialize()
@@ -66,15 +60,21 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 		}
 		garbages.Remove(obj);
 		if (garbages.Count <= 0) {
-			gameState = State.GameEnd;
+			GameEnd();
 		}
 	}
 
 	public bool CheckEndPlayCount()
 	{
 		if (MAX_PLAY_COUNT <= playCount) {
-			gameState = State.GameEnd;
+			GameEnd();
 		}
 		return (MAX_PLAY_COUNT <= playCount);
+	}
+
+	protected void GameEnd()
+	{
+		gameState = State.GameEnd;
+		Pause(true);
 	}
 }
