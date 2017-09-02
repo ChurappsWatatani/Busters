@@ -46,6 +46,7 @@ public class PoseManager : MonoBehaviour {
 	}
 	public void OnPushTitleButton()
 	{
+		GameManager.instance.Pause(false);
 		SceneManager.LoadScene("01_Title");
 	}
 }
