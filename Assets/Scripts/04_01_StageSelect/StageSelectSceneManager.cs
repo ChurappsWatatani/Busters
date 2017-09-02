@@ -47,6 +47,6 @@ public class StageSelectSceneManager : MonoBehaviour {
 	}
 	private void ChangeScene()
 	{
-		SceneManager.LoadScene("04_Game'");
+		SceneManager.LoadScene("04_Game");
 	}
 }
