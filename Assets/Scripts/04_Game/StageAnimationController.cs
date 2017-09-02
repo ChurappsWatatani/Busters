@@ -3,14 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StageAnimationController : MonoBehaviour {
+	public Animation anime;
 
-	// Use this for initialization
-	void Start () {
-		
+	public void EnterEndAnimation()
+	{
+		anime.Play("GameClear");
+	}
+
+	public void EnterWarning()
+	{
+		anime.Play("Warning");
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+	public void ExitEndAnimation()
+	{
+		GameManager.instance.ExitEndAnimation();
+	}
+
+	public void ExitWarning()
+	{
+		GameManager.instance.GameStart();
 	}
 }

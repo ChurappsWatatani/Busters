@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void OnBeginDrag(PointerEventData data)
 	{
-		if (isSnap) return;
+		if (!IsPlaying()) return;
 		dragStartPos = data.position;
 	}
 
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void OnEndDrag(PointerEventData data)
 	{
-		if (isSnap) return;
+		if (!IsPlaying()) return;
 		isSnap = true;
 
 		float diff = Vector2.Distance(dragStartPos, data.position);
@@ -107,6 +107,11 @@ public class PlayerController : MonoBehaviour {
 		rigid.velocity = vel * rate;
 
 		Debug.Log(vel.ToString());
+	}
+
+	protected bool IsPlaying()
+	{
+		return !(isSnap || GameManager.instance.gameState != GameManager.State.Playing);
 	}
 
 	protected void Reflection()
