@@ -12,13 +12,10 @@ public class ResutPoint : MonoBehaviour
 	[SerializeField]
 	private Text _TxtDustPoint;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	public void setPoint(Sprite iGarbageImage,string iGarbageNum,string iGarbagePoint)
+	{
+		_ImgDust.sprite = iGarbageImage;
+		_TxtDustNum.text = iGarbageNum;
+		_TxtDustPoint.text = iGarbagePoint;
 	}
 }
