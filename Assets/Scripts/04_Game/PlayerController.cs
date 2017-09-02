@@ -101,9 +101,7 @@ public class PlayerController : MonoBehaviour {
 			arrow.SetActive(true);
 		}
 		var vel = dragStartPos - data.position;
-		Debug.Log(vel);
-		Debug.Log("θ : " + (Mathf.Atan(vel.y / vel.x) / Mathf.PI * 180));
-		arrow.transform.rotation = Quaternion.AngleAxis((Mathf.Atan(vel.y / vel.x) / Mathf.PI * 180), Vector3.forward);
+		arrow.transform.rotation = Quaternion.AngleAxis((Mathf.Atan(vel.y / vel.x) / Mathf.PI * 180) + ((vel.x < 0) ? 180 : 0), Vector3.forward);
 	}
 
 	public void OnEndDrag(PointerEventData data)

@@ -16,7 +16,10 @@ public class ResultSceneManager : MonoBehaviour
 	private List<ResutPoint> _ResutPoints = new List<ResutPoint>();
 
 	[SerializeField]
-	private List<Sprite> _GarbageSprits;
+	private List<GameObject> _GarbageObjects;
+
+	[SerializeField]
+	private List<Sprite> _GarbageSprites;
 
 	void Start()
 	{
@@ -35,39 +38,49 @@ public class ResultSceneManager : MonoBehaviour
 
 		int i = 0;
 		foreach (var item in GameManager.instance.busterGarbages) {
-			_ResutPoints[i].setPoint (setGarbageData(item.Key), item.Value.ToString(),setGarbagePoint(item.Key).ToString());
+
+			Sprite aGarbageSprite = null;
+			int aPoint = 0;
+
+			Debug.Log (item.Key);
+
+			switch (item.Key) {
+
+			case  "g_001":
+				aGarbageSprite = _GarbageSprites [1];
+				aPoint =  _GarbageObjects [1].GetComponent<GarbageController>().point;
+				break;
+
+			case  "g_002":
+				aGarbageSprite = _GarbageSprites [2];
+				aPoint =  _GarbageObjects [2].GetComponent<GarbageController>().point;
+				break;
+
+			case  "g_003":
+				aGarbageSprite = _GarbageSprites [3];
+				aPoint =  _GarbageObjects [3].GetComponent<GarbageController>().point;
+				break;
+
+			case  "g_004":
+				aGarbageSprite = _GarbageSprites [4];
+				aPoint =  _GarbageObjects [4].GetComponent<GarbageController>().point;
+				break;
+
+			case  "g_005":
+				aGarbageSprite = _GarbageSprites [5];
+				aPoint =  _GarbageObjects [5].GetComponent<GarbageController>().point;
+				break;
+			}
+
+			aPoint =  GameManager.instance.busterGarbagePoints[item.Key];
+
+			_ResutPoints[i].setPoint (aGarbageSprite, item.Value.ToString(),(aPoint * item.Value).ToString());
+		
 			i++;
 		}
 
-		// TODO 得点がしきい値を超えて、ひみつ画面とクレジット画面が開放
-		if (GameManager.instance.point > 1000000000) {
-			PlayerPrefs.SetInt (PlayerPrefsKey.CREDIT_KEY, 1);
-			PlayerPrefs.SetInt (PlayerPrefsKey.SECRET_KEY, 1);
-		}
 	}
 
-	private Sprite setGarbageData(string iGarbageName)
-	{
-		switch (iGarbageName) {
-
-		case  "Garbage1":
-			return _GarbageSprits [1];
-			break;
-
-		case  "Garbage2":
-			return _GarbageSprits [2];
-			break;
-
-		case  "Garbage3":
-			return _GarbageSprits [3];
-			break;
-
-
-		default:
-			return _GarbageSprits [1];
-			break;
-		}
-	}
 
 	private int setGarbagePoint(string iGarbageName)
 	{
