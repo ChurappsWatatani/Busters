@@ -18,11 +18,10 @@ public class TitleSceneManager : MonoBehaviour {
 		{
 			_secretButton.SetActive(true);
 		}
-
 	}
 	public void OnPushStartButton()
 	{
-		SceneManager.LoadScene("04_Game");
+		SceneManager.LoadScene("04_01_StageSelect");
 	}
 
 	public void OnPushCreditButton()
