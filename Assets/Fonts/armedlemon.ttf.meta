@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 5db0dd187368e470fb526ab1843e92c2
+timeCreated: 1504316515
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: ArmedLemon
+  fontNames:
+  - ArmedLemon
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
