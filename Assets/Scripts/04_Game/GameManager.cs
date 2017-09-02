@@ -41,6 +41,9 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 		garbages = GameObject.FindGameObjectsWithTag("Garbage").ToList();
 		animator = GameObject.FindGameObjectWithTag("StageAnimation").GetComponent<StageAnimationController>();
+
+		//本来はステージごとにwarningに行くかスタートするか決める
+		GameStart();
 	}
 
 	public void GameStart()
@@ -89,7 +92,6 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 	{
 		Debug.Log("GameEnd");
 		gameState = State.GameEnd;
-		//Pause(true);
 		animator.EnterEndAnimation();
 	}
 }
