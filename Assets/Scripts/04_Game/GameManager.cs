@@ -37,6 +37,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 	public void Start()
 	{
 		gameState = State.None;
+		CASoundManager.instance.playBgm(1);
 	}
 
 	public void Update()
@@ -73,6 +74,14 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 
 		//ステージ内のゴミリスト取得
 		garbages = GameObject.FindGameObjectsWithTag("Garbage").ToList();
+
+		if (stageCount == 4 || stageCount == 5 || stageCount == 8) {
+			CASoundManager.instance.playBgm(stageCount);
+		}
+		else {
+			CASoundManager.instance.playBgm(1);
+		}
+		CASoundManager.instance.playSe(CASoundManager.SE.START);
 
 		if (stageCount < 8) {
 			GameStart();

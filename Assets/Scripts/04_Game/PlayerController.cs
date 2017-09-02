@@ -77,6 +77,9 @@ public class PlayerController : MonoBehaviour {
 				gameObject.transform.position = FirstPos;
 				return;
 			}
+			else {
+				CASoundManager.instance.playSe(CASoundManager.SE.GARBAGE);
+			}
 
 			g.hp--;
 			if (g.hp <= 0) {
@@ -85,6 +88,9 @@ public class PlayerController : MonoBehaviour {
 				GameManager.instance.AddBusgerGarbages(g.gameObject);
 				Destroy(g.gameObject);
 			}
+		}
+		else {
+			CASoundManager.instance.playSe(CASoundManager.SE.REFLECT);
 		}
 	}
 
@@ -127,6 +133,7 @@ public class PlayerController : MonoBehaviour {
 	protected void Reflection()
 	{
 		Debug.Log("Reflection");
+		CASoundManager.instance.playSe(CASoundManager.SE.REFLECT);
 		var tmp = rigid.velocity;
 		if ((Mathf.Abs(tmp.x) - Mathf.Abs(tmp.y)) > 0) {
 			tmp.x *= -1;
