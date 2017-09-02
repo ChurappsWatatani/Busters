@@ -63,6 +63,11 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void OnCollisionEnter2D(Collision2D c)
+	{
+		CASoundManager.instance.playSe(CASoundManager.SE.REFLECT);
+	}
+
 	public void OnTriggerEnter2D(Collider2D c)
 	{
 		if (c.tag == "Garbage") {
