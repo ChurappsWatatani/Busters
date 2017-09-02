@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using GarbageType = GarbageController.GarbageType;
 
 public class PlayerController : MonoBehaviour {
 	const float MAX_VELOCITY = 100;
 	const float MAX_DRAG_DISTANCE = 50;
+	private Vector2 FirstPos;
 
 	private Rigidbody2D rigid;
 	private Vector2 dragStartPos;
@@ -33,6 +35,9 @@ public class PlayerController : MonoBehaviour {
 
 		//リジッドボディ登録
 		rigid = GetComponent<Rigidbody2D>();
+
+		//初期値登録（以後書き換えない）
+		FirstPos = gameObject.transform.position;
 	}
 	
 	// Update is called once per frame
@@ -58,6 +63,18 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (c.tag == "Garbage") {
 			var g = c.GetComponent<GarbageController>();
+			if (g.type == GarbageType.B) {
+				Reflection();
+			}
+			else if (g.type == GarbageType.C && g.hp > 1) {
+				Reflection();
+			}
+			else if (g.type == GarbageType.D) {
+				rigid.velocity = Vector2.zero;
+				gameObject.transform.position = FirstPos;
+				return;
+			}
+
 			g.hp--;
 			if (g.hp <= 0) {
 				//ポイント追加して削除
@@ -90,5 +107,18 @@ public class PlayerController : MonoBehaviour {
 		rigid.velocity = vel * rate;
 
 		Debug.Log(vel.ToString());
+	}
+
+	protected void Reflection()
+	{
+		Debug.Log("Reflection");
+		var tmp = rigid.velocity;
+		if ((Mathf.Abs(tmp.x) - Mathf.Abs(tmp.y)) > 0) {
+			tmp.x *= -1;
+		}
+		else {
+			tmp.y *= -1;
+		}
+		rigid.velocity = tmp;
 	}
 }
