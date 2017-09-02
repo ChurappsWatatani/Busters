@@ -17,6 +17,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 	
 	public int point = 0;
 	public int playCount = 0;
+	public PlayerController player;
 	public List<GameObject> garbages = new List<GameObject>();
 	public Dictionary<string, int> busterGarbages = new Dictionary<string, int>();
 	public State gameState = State.Start;
@@ -41,7 +42,18 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 		playCount = 0;
 		gameState = State.Start;
 
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 		garbages = GameObject.FindGameObjectsWithTag("Garbage").ToList();
+	}
+
+	public void Pause(bool enable)
+	{
+		if (enable) {
+			Time.timeScale = 0;
+		}
+		else {
+			Time.timeScale = 1;
+		}
 	}
 
 	public void AddBusgerGarbages(GameObject obj)
