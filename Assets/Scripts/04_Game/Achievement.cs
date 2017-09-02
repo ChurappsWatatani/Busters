@@ -39,6 +39,7 @@ public class Achievement : MonoBehaviour {
 		{
 			return;
 		}
+		CASoundManager.instance.playSe(CASoundManager.SE.ACHIEVEMENT);
 		
 		//ここで画像とか文言とか差し替える
 		switch(stageCount)
