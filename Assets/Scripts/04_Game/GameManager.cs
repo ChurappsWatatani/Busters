@@ -69,6 +69,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 		var stage = obj.GetComponent<StageController>();
 		stageManager.stageText.text = "ステージ" + stageCount;
 		stageManager.stageNameText.text = stage.stageName;
+		stageManager.playCountText.text = "残機×" + (MAX_PLAY_COUNT - playCount);
 
 		//ステージ内のゴミリスト取得
 		garbages = GameObject.FindGameObjectsWithTag("Garbage").ToList();
@@ -124,6 +125,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
             GameEnd();
 			Debug.Log("残機なし");
 		}
+		stageManager.playCountText.text = "残機×" + (MAX_PLAY_COUNT - playCount);
 		return (MAX_PLAY_COUNT <= playCount);
 	}
 

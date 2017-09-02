@@ -6,4 +6,5 @@ using UnityEngine.UI;
 public class StageManager : MonoBehaviour {
 	public Text stageText;
 	public Text stageNameText;
+	public Text playCountText;
 }
