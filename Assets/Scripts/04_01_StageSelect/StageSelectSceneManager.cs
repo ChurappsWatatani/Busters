@@ -40,6 +40,11 @@ public class StageSelectSceneManager : MonoBehaviour {
 		PlayerPrefs.SetInt(PlayerPrefsKey.SELECTED_STAGE_KEY, 7);
 		ChangeScene();
 	}
+	public void OnPushStage8Button()
+	{
+		PlayerPrefs.SetInt(PlayerPrefsKey.SELECTED_STAGE_KEY, 8);
+		ChangeScene();
+	}
 	private void ChangeScene()
 	{
 		SceneManager.LoadScene("04_Game'");
