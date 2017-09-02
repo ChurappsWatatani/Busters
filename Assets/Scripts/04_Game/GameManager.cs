@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
+using UnityEngine.UI;
+
 public class GameManager : CASingletonMonoBehaviour<GameManager> {
 	const int MAX_PLAY_COUNT = 5;
 
@@ -21,6 +23,9 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 	public int point = 0;
 	public int playCount = 0;
 	public Dictionary<string, int> busterGarbages = new Dictionary<string, int>();
+
+	public Dictionary<string, int> busterGarbagePoints = new Dictionary<string, int>();
+
 	public State gameState = State.None;
 
 	protected int stageCount = 1;
@@ -43,6 +48,9 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 
 	public void Initialize()
 	{
+		busterGarbages = new Dictionary<string, int>();
+		busterGarbagePoints = new Dictionary<string, int>();
+
 		point = 0;
 		playCount = 0;
 		gameState = State.Start;
@@ -90,11 +98,16 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 
 	public void AddBusgerGarbages(GameObject obj)
 	{
-		if (busterGarbages.ContainsKey(obj.name)) {
-			busterGarbages[obj.name]++;
+		string aSpriteName = obj.GetComponent<Image> ().sprite.name;
+
+		int aPoint = obj.GetComponent<GarbageController> ().point;
+		if (busterGarbages.ContainsKey(aSpriteName)) {
+			busterGarbages[aSpriteName]++;
 		}
 		else {
-			busterGarbages.Add(obj.name, 1);
+			busterGarbages.Add(aSpriteName, 1);
+
+			busterGarbagePoints.Add(aSpriteName, aPoint);
 		}
 		garbages.Remove(obj);
 		if (garbages.Count <= 0) {
