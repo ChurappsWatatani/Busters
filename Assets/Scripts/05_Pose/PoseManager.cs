@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PoseManager : MonoBehaviour {
 
@@ -43,5 +44,8 @@ public class PoseManager : MonoBehaviour {
 		}
 		_currentIndex = 0;
 	}
-
+	public void OnPushTitleButton()
+	{
+		SceneManager.LoadScene("01_Title");
+	}
 }
