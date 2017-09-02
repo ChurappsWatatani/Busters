@@ -7,6 +7,9 @@ using GarbageType = GarbageController.GarbageType;
 public class PlayerController : MonoBehaviour {
 	const float MAX_VELOCITY = 100;
 	const float MAX_DRAG_DISTANCE = 50;
+
+	public GameObject arrow;
+
 	private Vector2 FirstPos;
 
 	private Rigidbody2D rigid;
@@ -93,12 +96,21 @@ public class PlayerController : MonoBehaviour {
 
 	public void OnDrag(PointerEventData data)
 	{
+		if (!IsPlaying()) return;
+		if (!arrow.activeSelf) {
+			arrow.SetActive(true);
+		}
+		var vel = dragStartPos - data.position;
+		Debug.Log(vel);
+		Debug.Log("θ : " + (Mathf.Atan(vel.y / vel.x) / Mathf.PI * 180));
+		arrow.transform.rotation = Quaternion.AngleAxis((Mathf.Atan(vel.y / vel.x) / Mathf.PI * 180), Vector3.forward);
 	}
 
 	public void OnEndDrag(PointerEventData data)
 	{
 		if (!IsPlaying()) return;
 		isSnap = true;
+		arrow.SetActive(false);
 
 		float diff = Vector2.Distance(dragStartPos, data.position);
 		float rate = diff / MAX_DRAG_DISTANCE;
