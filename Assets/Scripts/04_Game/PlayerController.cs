@@ -5,6 +5,7 @@ using UnityEngine;
 using GarbageType = GarbageController.GarbageType;
 
 public class PlayerController : MonoBehaviour {
+	public Achievement achievement;
 	const float MAX_VELOCITY = 100;
 	const float MAX_DRAG_DISTANCE = 50;
 

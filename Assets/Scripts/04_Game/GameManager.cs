@@ -34,6 +34,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 	protected List<GameObject> garbages = new List<GameObject>();
 	protected StageAnimationController animator;
 
+	private Achievement _achievement;
 	public void Start()
 	{
 		gameState = State.None;
@@ -59,6 +60,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 		animator = GameObject.FindGameObjectWithTag("StageAnimation").GetComponent<StageAnimationController>();
 		stageManager = GameObject.FindGameObjectWithTag("StageManager").GetComponent<StageManager>();
+		_achievement = GameObject.Find("Achievement").GetComponent<Achievement>();
 
 		stageCount = PlayerPrefs.GetInt(PlayerPrefsKey.SELECTED_STAGE_KEY, 1);
 		var stageParent = GameObject.FindGameObjectWithTag("Stage");
@@ -116,6 +118,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 		if (garbages.Count <= 0) {
 			Debug.Log("ゴミ終了");
 			GameEnd();
+			_achievement.MakeAchevement(stageCount);
 		}
 	}
 
