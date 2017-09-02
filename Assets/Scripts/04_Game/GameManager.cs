@@ -9,6 +9,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 
 	public enum State
 	{
+		None,
 		Start,
 		StartAnimation,
 		Playing,
@@ -20,7 +21,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 	public int point = 0;
 	public int playCount = 0;
 	public Dictionary<string, int> busterGarbages = new Dictionary<string, int>();
-	public State gameState = State.Start;
+	public State gameState = State.None;
 
 	protected int stageCount = 1;
 	protected StageManager stageManager;
@@ -67,6 +68,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 			GameStart();
 		}
 		else {
+			gameState = State.StartAnimation;
 			animator.EnterWarning();
 		}
 	}
@@ -112,6 +114,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 
 	public void ExitEndAnimation()
 	{
+		gameState = State.Result;
 		SceneManager.LoadScene("06_Result");
 	}
 
