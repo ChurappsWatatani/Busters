@@ -52,7 +52,6 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 		stageManager = GameObject.FindGameObjectWithTag("StageManager").GetComponent<StageManager>();
 
 		stageCount = PlayerPrefs.GetInt(PlayerPrefsKey.SELECTED_STAGE_KEY, 1);
-		stageCount = 6;
 		var stageParent = GameObject.FindGameObjectWithTag("Stage");
 		var obj = Instantiate(Resources.Load("Prefabs/Stage" + stageCount)) as GameObject;
 		obj.transform.SetParent(stageParent.transform);
