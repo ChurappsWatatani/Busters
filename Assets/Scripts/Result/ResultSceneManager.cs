@@ -41,77 +41,35 @@ public class ResultSceneManager : MonoBehaviour
 
 			Debug.Log (item.Key);
 
-//			switch (item.Key) {
-//
-//			case  "g_001":
-//				aGarbageSprite = _GarbageSprites [1];
-//				break;
-//
-//			case  "g_002":
-//				aGarbageSprite = _GarbageSprites [2];
-//				break;
-//
-//			case  "g_003":
-//				aGarbageSprite = _GarbageSprites [3];
-//				break;
-//
-//			case  "g_004":
-//				aGarbageSprite = _GarbageSprites [4];
-//				break;
-//
-//			case  "g_005":
-//				aGarbageSprite = _GarbageSprites [5];
-//				break;
-//
-//			case  "g_006":
-//				aGarbageSprite = _GarbageSprites [6];
-//				break;
-//
-//			case  "jam_007":
-//				aGarbageSprite = _GarbageSprites [7];
-//				break;
-//
-//			case  "jam_008":
-//				aGarbageSprite = _GarbageSprites [8];
-//				break;
-//
-//			case  "jam_009":
-//				aGarbageSprite = _GarbageSprites [9];
-//				break;
-//			}
 			aGarbageSprite = GameManager.instance.busterGarbageSprite[item.Key];
 			aPoint =  GameManager.instance.busterGarbagePoints[item.Key];
 
 			_ResutPoints[i].setPoint (aGarbageSprite, item.Value.ToString(),(aPoint * item.Value).ToString());
 		
 			i++;
+			if (i >= 4) {
+				break;
+			}
 		}
 
-	}
+		//おまけ解放
+		int aTotalPoint = PlayerPrefs.GetInt(PlayerPrefsKey.TOTAL_POINT ,0);
+		aTotalPoint += GameManager.instance.point;
+		PlayerPrefs.SetInt(PlayerPrefsKey.TOTAL_POINT, aTotalPoint);
 
+		Debug.Log ("aTotalPoint " + aTotalPoint);
 
-	private int setGarbagePoint(string iGarbageName)
-	{
-		switch (iGarbageName) {
+		if (aTotalPoint > 3000) {
+			//3000以上でクレジット解放
+			PlayerPrefs.SetInt(PlayerPrefsKey.CREDIT_KEY, 1);
 
-		case  "Garbage1":
-			return 100;
-			break;
-
-		case  "Garbage2":
-			return 150;
-			break;
-
-		case  "Garbage3":
-			return  0;
-			break;
-
-		default:
-			return  0;
-			break;
+		} 
+		if (aTotalPoint > 5000) {
+			//5000以上でひみつの部屋解放
+			PlayerPrefs.SetInt(PlayerPrefsKey.SECRET_KEY, 1);
 		}
 	}
-
+		
 
 	private void reset()
 	{
@@ -120,8 +78,7 @@ public class ResultSceneManager : MonoBehaviour
 			aResutPoint.setPoint (null, "", "");
 		}
 	}
-
-
+		
 	public void OnPushReplayButton()
 	{
 		SceneManager.LoadScene("04_Game");

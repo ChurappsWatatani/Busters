@@ -11,6 +11,9 @@ public class PlayerPrefsKey {
 	//ユーザが選択したステージ
 	public static string SELECTED_STAGE_KEY = "SelectedStage";
 
+	//ユーザ累計ポイント
+	public static string TOTAL_POINT = "TotalPoint";
+
 
 	// private static PlayerPrefs instance_;
 
