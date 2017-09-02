@@ -8,6 +8,7 @@ public class PoseButton : MonoBehaviour {
 	public void OnPushPoseButton()
 	{
 		//ゲームを中断する処理とかが必要ならここで呼ぶ
+		GameManager.instance.Pause(true);
 
 		//ポーズシーンを追加でLoadする
 		SceneManager.LoadScene("05_Pose", LoadSceneMode.Additive);

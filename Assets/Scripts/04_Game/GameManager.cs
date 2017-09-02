@@ -9,14 +9,17 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 	public enum State
 	{
 		Start,
+		StartAnimation,
 		Playing,
 		GameEnd,
 		EndAnimation,
 		Result
 	}
+	public int stageCount = 1;
 	
 	public int point = 0;
 	public int playCount = 0;
+	public PlayerController player;
 	public List<GameObject> garbages = new List<GameObject>();
 	public Dictionary<string, int> busterGarbages = new Dictionary<string, int>();
 	public State gameState = State.Start;
@@ -27,21 +30,24 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 		Initialize();
 	}
 
-	public void Update()
-	{
-		if (gameState == State.GameEnd) {
-			gameState = State.EndAnimation;
-			Debug.Log("Game EndAnimation");
-		}
-	}
-
 	public void Initialize()
 	{
 		point = 0;
 		playCount = 0;
 		gameState = State.Start;
 
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 		garbages = GameObject.FindGameObjectsWithTag("Garbage").ToList();
+	}
+
+	public void Pause(bool enable)
+	{
+		if (enable) {
+			Time.timeScale = 0;
+		}
+		else {
+			Time.timeScale = 1;
+		}
 	}
 
 	public void AddBusgerGarbages(GameObject obj)
@@ -54,15 +60,21 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 		}
 		garbages.Remove(obj);
 		if (garbages.Count <= 0) {
-			gameState = State.GameEnd;
+			GameEnd();
 		}
 	}
 
 	public bool CheckEndPlayCount()
 	{
 		if (MAX_PLAY_COUNT <= playCount) {
-			gameState = State.GameEnd;
+			GameEnd();
 		}
 		return (MAX_PLAY_COUNT <= playCount);
+	}
+
+	protected void GameEnd()
+	{
+		gameState = State.GameEnd;
+		Pause(true);
 	}
 }

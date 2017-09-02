@@ -8,5 +8,6 @@ public class CloseButton : MonoBehaviour {
 	public void OnPushCloseButton()
 	{
 		SceneManager.UnloadSceneAsync("05_Pose");
+		GameManager.instance.Pause(false);
 	}
 }
