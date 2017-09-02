@@ -16,9 +16,6 @@ public class ResultSceneManager : MonoBehaviour
 	private List<ResutPoint> _ResutPoints = new List<ResutPoint>();
 
 	[SerializeField]
-	private List<GameObject> _GarbageObjects;
-
-	[SerializeField]
 	private List<Sprite> _GarbageSprites;
 
 	void Start()
@@ -44,34 +41,45 @@ public class ResultSceneManager : MonoBehaviour
 
 			Debug.Log (item.Key);
 
-			switch (item.Key) {
-
-			case  "g_001":
-				aGarbageSprite = _GarbageSprites [1];
-				aPoint =  _GarbageObjects [1].GetComponent<GarbageController>().point;
-				break;
-
-			case  "g_002":
-				aGarbageSprite = _GarbageSprites [2];
-				aPoint =  _GarbageObjects [2].GetComponent<GarbageController>().point;
-				break;
-
-			case  "g_003":
-				aGarbageSprite = _GarbageSprites [3];
-				aPoint =  _GarbageObjects [3].GetComponent<GarbageController>().point;
-				break;
-
-			case  "g_004":
-				aGarbageSprite = _GarbageSprites [4];
-				aPoint =  _GarbageObjects [4].GetComponent<GarbageController>().point;
-				break;
-
-			case  "g_005":
-				aGarbageSprite = _GarbageSprites [5];
-				aPoint =  _GarbageObjects [5].GetComponent<GarbageController>().point;
-				break;
-			}
-
+//			switch (item.Key) {
+//
+//			case  "g_001":
+//				aGarbageSprite = _GarbageSprites [1];
+//				break;
+//
+//			case  "g_002":
+//				aGarbageSprite = _GarbageSprites [2];
+//				break;
+//
+//			case  "g_003":
+//				aGarbageSprite = _GarbageSprites [3];
+//				break;
+//
+//			case  "g_004":
+//				aGarbageSprite = _GarbageSprites [4];
+//				break;
+//
+//			case  "g_005":
+//				aGarbageSprite = _GarbageSprites [5];
+//				break;
+//
+//			case  "g_006":
+//				aGarbageSprite = _GarbageSprites [6];
+//				break;
+//
+//			case  "jam_007":
+//				aGarbageSprite = _GarbageSprites [7];
+//				break;
+//
+//			case  "jam_008":
+//				aGarbageSprite = _GarbageSprites [8];
+//				break;
+//
+//			case  "jam_009":
+//				aGarbageSprite = _GarbageSprites [9];
+//				break;
+//			}
+			aGarbageSprite = GameManager.instance.busterGarbageSprite[item.Key];
 			aPoint =  GameManager.instance.busterGarbagePoints[item.Key];
 
 			_ResutPoints[i].setPoint (aGarbageSprite, item.Value.ToString(),(aPoint * item.Value).ToString());
