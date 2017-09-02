@@ -23,8 +23,8 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 	public int point = 0;
 	public int playCount = 0;
 	public Dictionary<string, int> busterGarbages = new Dictionary<string, int>();
-
 	public Dictionary<string, int> busterGarbagePoints = new Dictionary<string, int>();
+	public Dictionary<string, Sprite> busterGarbageSprite = new Dictionary<string, Sprite>();
 
 	public State gameState = State.None;
 
@@ -50,6 +50,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 	{
 		busterGarbages = new Dictionary<string, int>();
 		busterGarbagePoints = new Dictionary<string, int>();
+		busterGarbageSprite = new Dictionary<string, Sprite>();
 
 		point = 0;
 		playCount = 0;
@@ -108,6 +109,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 			busterGarbages.Add(aSpriteName, 1);
 
 			busterGarbagePoints.Add(aSpriteName, aPoint);
+			busterGarbageSprite.Add(aSpriteName, obj.GetComponent<Image> ().sprite);
 		}
 		garbages.Remove(obj);
 		if (garbages.Count <= 0) {
