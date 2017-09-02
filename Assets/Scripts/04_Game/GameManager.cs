@@ -31,7 +31,7 @@ public class GameManager : CASingletonMonoBehaviour<GameManager> {
 
 	public void Start()
 	{
-		gameState = State.Start;
+		gameState = State.None;
 	}
 
 	public void Update()

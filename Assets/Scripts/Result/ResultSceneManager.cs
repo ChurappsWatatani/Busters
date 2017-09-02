@@ -104,6 +104,7 @@ public class ResultSceneManager : MonoBehaviour
 	public void OnPushReplayButton()
 	{
 		SceneManager.LoadScene("04_Game");
+		GameManager.instance.gameState = GameManager.State.Start;
 	}
 
 	public void OnPushToTitletButton()
